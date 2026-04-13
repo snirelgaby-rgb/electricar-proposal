@@ -1,0 +1,39 @@
+import os
+
+# --- הגדרות נתיבים ---
+# כאן תדביק את הנתיב לתיקייה של ה-GitHub שלך (למשל C:/Users/Snir/Documents/GitHub/electricar-proposal)
+base_path = r'c:\Users\SNIR\Desktop\הצעות מחיר - אלקטריקאר 2026\electricar proposal' 
+
+# --- קבלת נתונים מהמשתמש ---
+customer_folder_name = input("הכנס שם תיקייה ללקוח (באנגלית, למשל: moshe): ")
+customer_name_heb = input("הכנס שם לקוח מלא (בעברית): ")
+total_price = input("הכנס מחיר סופי (ללא מע''מ): ")
+
+# יצירת התיקייה החדשה בתוך ה-Repository
+new_folder_path = os.path.join(base_path, customer_folder_name)
+if not os.path.exists(new_folder_path):
+    os.makedirs(new_folder_path)
+
+# --- שלד ה-HTML (הקוד המעוצב שלך) ---
+html_content = f"""
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>הצעת מחיר - {customer_name_heb}</title>
+    </head>
+<body>
+    <h1>שלום {customer_name_heb},</h1>
+    <p>מצורפת הצעת המחיר שלך עבור עמדת טעינה.</p>
+    <div class="price">סה"כ לתשלום: {total_price} ₪ + מע"מ</div>
+</body>
+</html>
+"""
+
+# שמירת הקובץ כ-index.html בתוך התיקייה של הלקוח
+file_path = os.path.join(new_folder_path, "index.html")
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"\n✅ הצלחה! נוצרה תיקייה בשם '{customer_folder_name}' עם קובץ index.html.")
+print(f"עכשיו כנס ל-GitHub Desktop, תעשה Commit ו-Push.")
