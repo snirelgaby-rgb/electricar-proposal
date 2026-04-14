@@ -1,7 +1,7 @@
 import os
 
 # --- 1. הגדרות נתיב ---
-base_path = r'C:\Users\SNIR\Desktop\2026 רישום תובלה - ראקטיקה\הצעות מחיר - אלקטריקה\electricar proposal' 
+base_path = r'C:\Users\SNIR\Desktop\הצעות מחיר - אלקטריקאר 2026\הצעות מחיר - אלקטריקאר' 
 
 print("--- מחולל הצעות מחיר אלקטריקה - גרסה מעוצבת מלאה ---")
 
