@@ -1,7 +1,7 @@
 import os
 
 # נתיב ה-GitHub שלך
-base_path = r'C:\Users\SNIR\Desktop\הצעות מחיר - אלקטריקר\2026 הצעות מחיר - אלקטריקר'
+base_path = r'C:\Users\SNIR\Desktop\הצעות מחיר - אלקטריקאר 2026\electricar proposal'
 
 def generate_interactive_quote():
     print("--- יצירת הצעת מחיר אינטראקטיבית ---")
