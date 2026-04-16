@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Коммерческое предложение — Юлия Николов</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a2e;
+      --deep: #0f3460;
+      --gold: #c9a84c;
+      --gold-light: #e8c97e;
+      --muted: #6b7280;
+      --surface: #f8f6f2;
+      --white: #ffffff;
+      --border: #e2d9c8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--surface);
+      font-family: 'Raleway', sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* LANG BAR */
+    .lang-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,246,242,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .lang-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lang-toggle {
+      display: flex;
+      background: var(--deep);
+      border-radius: 50px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .lang-btn {
+      padding: 6px 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      transition: all 0.22s ease;
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+    }
+    .lang-btn.active {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    /* PAGE */
+    .page {
+      max-width: 860px;
+      margin: 40px auto;
+      background: var(--white);
+      box-shadow: 0 8px 60px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--deep);
+      padding: 48px 56px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.10);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 30%;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.06);
+    }
+    .header-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .company-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+    .company-slogan {
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 1.8px;
+      margin-top: 7px;
+      direction: rtl;
+    }
+    .header-date {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: right;
+      position: relative;
+    }
+    .header-divider-line {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.62);
+      position: relative;
+    }
+    .header-address {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      margin-top: 4px;
+      position: relative;
+    }
+
+    /* GOLD STRIP */
+    .header-divider {
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, transparent 100%);
+    }
+
+    /* BODY */
+    .body { padding: 48px 56px; }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    /* SCOPE ITEMS */
+    .scope-item {
+      display: flex;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .scope-item:last-child { border-bottom: none; }
+    .item-num {
+      min-width: 36px;
+      height: 36px;
+      background: var(--deep);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .item-content h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--deep);
+      margin-bottom: 6px;
+    }
+    .item-content p {
+      font-size: 14px;
+      font-weight: 400;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+    .sub-list { list-style: none; margin-top: 8px; }
+    .sub-list li {
+      font-size: 13.5px;
+      color: #4b5563;
+      padding: 3px 0 3px 18px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .sub-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* TOTAL BLOCK */
+    .total-block {
+      margin: 36px 0;
+      background: var(--deep);
+      border-radius: 12px;
+      padding: 28px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .total-label-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .total-price-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .price-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .price-vat {
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* VAT BUTTON */
+    .vat-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: 1.5px solid rgba(201,168,76,0.5);
+      border-radius: 50px;
+      padding: 8px 22px;
+      color: var(--gold);
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      direction: rtl;
+    }
+    .vat-btn:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+    .vat-btn.active { background: rgba(201,168,76,0.15); border-color: var(--gold); }
+    .vat-result {
+      display: none;
+      width: 100%;
+      max-width: 320px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px;
+      padding: 14px 20px;
+      direction: rtl;
+    }
+    .vat-result.visible { display: block; }
+    .vat-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .vat-line:last-child { border-bottom: none; }
+    .vat-line-total {
+      padding-top: 10px;
+      margin-top: 4px;
+      border-top: 1px solid rgba(201,168,76,0.3);
+      border-bottom: none;
+    }
+    .vat-line-label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); }
+    .vat-line-val { font-family: 'Playfair Display', serif; font-size: 14px; color: rgba(255,255,255,0.8); }
+    .vat-total-val { font-size: 20px; color: var(--gold-light); font-weight: 700; }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 36px 0;
+    }
+
+    /* ADDITIONAL COSTS */
+    .additional-block {
+      background: #fdf8ee;
+      border: 1px solid #e8d9b0;
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 36px 0;
+    }
+    .add-item {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px dashed #e0d0a8;
+    }
+    .add-item:last-child { border-bottom: none; }
+    .add-num {
+      min-width: 26px;
+      height: 26px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .add-item p { font-size: 13.5px; color: #4b5563; line-height: 1.7; }
+    .add-item strong { color: var(--ink); font-weight: 600; }
+
+    /* PAYMENT */
+    .payment-block {
+      background: var(--ink);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin: 36px 0;
+    }
+    .payment-block .section-label { color: var(--gold-light); }
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .payment-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 8px;
+      padding: 20px 22px;
+    }
+    .payment-card .pct {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .payment-card .when {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin: 8px 0 10px;
+    }
+    .payment-card .desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.65;
+    }
+    .payment-note {
+      margin-top: 16px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.42);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* WARRANTY */
+    .warranty-block {
+      margin: 36px 0;
+      border-left: 4px solid var(--gold);
+      padding-left: 24px;
+    }
+    .warranty-item { margin-bottom: 20px; }
+    .warranty-item:last-child { margin-bottom: 0; }
+    .warranty-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--deep);
+      margin-bottom: 6px;
+    }
+    .warranty-item p {
+      font-size: 13.5px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    /* MOTTO */
+    .motto-block {
+      margin-top: 40px;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--deep);
+      border-radius: 0 0 8px 8px;
+      padding: 32px 44px;
+      text-align: center;
+      background: var(--white);
+    }
+    .motto-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--deep);
+      line-height: 1.85;
+      letter-spacing: 0.2px;
+    }
+    .motto-text span {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 1px;
+    }
+    .motto-seal {
+      margin-top: 18px;
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 5px 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; max-width: 100%; }
+      .lang-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span class="lang-label">שפה / Язык</span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-ru" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" id="btn-he" onclick="setLang('he')">עב</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-top-row">
+      <div>
+        <div class="company-name">אלקטריקאר</div>
+        <div class="company-slogan" id="company-slogan">אל תטען שלא ידעת</div>
+      </div>
+      <div class="header-date" id="header-date">13 апреля 2026 г.</div>
+    </div>
+    <div class="header-divider-line"></div>
+    <div class="header-title" id="header-title">Коммерческое предложение</div>
+    <div class="header-subtitle" id="header-subtitle">Подготовлено для: </div>
+    <div class="header-address" id="header-address">ул. Бикурей а-Анавим 55, Ашкелон</div>
+  </header>
+
+  <div class="header-divider"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="section-label" id="scope-label">Объём работ</div>
+
+    <div class="scope-item">
+      <div class="item-num">1</div>
+      <div class="item-content">
+        <h3 id="s1-title">Прокладка силового кабеля</h3>
+        <p id="s1-body">Прокладка зелёного силового кабеля от парковочного места клиента до щита учёта на первом этаже в выделенной кабельной трассе в соответствии с требованиями Правил электроустановок.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="item-num">2</div>
+      <div class="item-content">
+        <h3 id="s2-title">Монтаж электрического щита (разветвление счётчика)</h3>
+        <p id="s2-body">Установка электрощита непосредственно рядом с индивидуальным счётчиком клиента. Щит включает в себя:</p>
+        <ul class="sub-list">
+          <li id="s2-li1">Главный автоматический выключатель</li>
+          <li id="s2-li2">Квартирный автоматический выключатель</li>
+          <li id="s2-li3">Автоматический выключатель цепи зарядной станции</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="item-num">3</div>
+      <div class="item-content">
+        <h3 id="s3-title">Поставка и установка зарядной станции Nexus</h3>
+        <p id="s3-body">Поставка и монтаж зарядной станции производства <strong>Nexus</strong> с максимальной мощностью зарядки до <strong>22 кВт / 32 А</strong>. Станция управляется через мобильное приложение или RFID-чип и поддерживает функцию программирования автоматического расписания зарядки.</p>
+      </div>
+    </div>
+
+    <div class="scope-item">
+      <div class="item-num">4</div>
+      <div class="item-content">
+        <h3 id="s4-title">Установка аварийного реле нагрузки</h3>
+        <p id="s4-body">Установка реле нагрузки <strong>4×40 А</strong> рядом с зарядной станцией. Устройство выполняет функцию аварийного / сервисного выключателя, обязательного согласно требованиям Правил электроустановок.</p>
+      </div>
+    </div>
+
+    <!-- TOTAL -->
+    <div class="total-block">
+      <div class="total-label-text" id="total-label">סה״כ להצעת מחיר זו</div>
+      <div class="total-price-row">
+        <div class="price-main" id="priceDisplay"></div>
+        <div class="price-vat" id="price-note">כולל עמדת טעינה</div>
+      </div>
+      <button class="vat-btn" id="vatBtn" onclick="toggleVat()">
+        <span id="vatBtnText">חשב כולל מע״מ 18%</span>
+      </button>
+      <div class="vat-result" id="vatResult">
+        <div class="vat-line">
+          <span class="vat-line-label" id="vat-base-label">לפני מע״מ</span>
+          <span class="vat-line-val" id="vatBase"></span>
+        </div>
+        <div class="vat-line">
+          <span class="vat-line-label" id="vat-tax-label">מע״מ 18%</span>
+          <span class="vat-line-val" id="vatTax"></span>
+        </div>
+        <div class="vat-line vat-line-total">
+          <span class="vat-line-label" id="vat-total-label">סה״כ לתשלום</span>
+          <span class="vat-line-val vat-total-val" id="vatTotal"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ADDITIONAL COSTS -->
+    <div class="additional-block">
+      <div class="section-label" id="add-label">Дополнительные расходы — не включены в предложение</div>
+      <p id="add-intro" style="font-size:13px; color:#6b7280; margin-bottom:16px;">Следующие платежи обязательны, однако выплачиваются напрямую третьим сторонам и не входят в сумму данного предложения.</p>
+      <div class="add-item">
+        <div class="add-num">1</div>
+        <p><strong id="add1-title">Сбор электрической компании — 656,08 ₪ (включая НДС)</strong><br/>
+        <span id="add1-body">Для подключения зарядной станции к счётчику требуется выезд представителя электрической компании для временного отключения напряжения. Данный тариф установлен компанией, и мы не имеем возможности влиять на его размер.</span></p>
+      </div>
+      <div class="add-item">
+        <div class="add-num">2</div>
+        <p><strong id="add2-title">Проверка лицензированным электротехником — 700 ₪ + НДС</strong><br/>
+        <span id="add2-body">По закону по завершении монтажа зарядной станции обязательна инспекция сертифицированного независимого электротехника. Проверка выполняется внешним специалистом и оплачивается ему напрямую.</span></p>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="payment-block">
+      <div class="section-label" id="pay-label">Условия оплаты</div>
+      <div class="payment-grid">
+        <div class="payment-card">
+          <div class="pct">50%</div>
+          <div class="when" id="pay1-when">Авансовый платёж</div>
+          <div class="desc" id="pay1-desc">Банковский перевод до согласования даты монтажа</div>
+        </div>
+        <div class="payment-card">
+          <div class="pct">50%</div>
+          <div class="when" id="pay2-when">По завершении работ</div>
+          <div class="desc" id="pay2-desc">Банковский перевод в день окончания монтажа</div>
+        </div>
+      </div>
+      <div class="payment-note" id="pay-note">* На каждый банковский перевод выставляется отдельная квитанция.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WARRANTY -->
+    <div class="section-label" id="warr-label">Гарантия и важные примечания</div>
+    <div class="warranty-block">
+      <div class="warranty-item">
+        <h4 id="warr1-title">Гарантия на оборудование и работы — 2 года</h4>
+        <p id="warr1-body">Гарантийный срок — два года с даты завершения монтажа. Гарантия не распространяется на случаи вандализма, ремонт станции неуполномоченными специалистами, а также на неисправности, вызванные внутридомовыми аварийными ситуациями в электросети.</p>
+      </div>
+      <div class="warranty-item">
+        <h4 id="warr2-title">Сроки выезда электрической компании</h4>
+        <p id="warr2-body">Дата и время прибытия представителя электрической компании определяются исключительно самой компанией. Мы, как уполномоченная сторона, полностью зависим от их графика.</p>
+      </div>
+    </div>
+
+    <!-- MOTTO -->
+    <div class="motto-block">
+      <div class="motto-text" id="motto">
+        Мы уделяем особое внимание <span>эстетичному, аккуратному и профессиональному монтажу</span> на каждом объекте.<br/>
+        Все работы выполняются в строгом соответствии с Правилами электроустановок, обеспечивая <span>максимальный уровень электробезопасности</span>.
+      </div>
+      <div class="motto-seal">אלקטריקאר · מקצוענות ובטיחות</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const total_price = parseInt("{{TOTAL_PRICE}}".replace(/,/g, ''));
+const customer_name_ru = "{{CUSTOMER_NAME_RU}}";
+const customer_name_he = "{{CUSTOMER_NAME_HE}}";
+
+const T = {
+  ru: {
+    "doc-title": "Коммерческое предложение — " + customer_name_ru,
+    "company-slogan": "אל תטען שלא ידעת",
+    "header-date": "13 апреля 2026 г.",
+    "header-title": "Коммерческое предложение",
+    "header-subtitle": "Подготовлено для: " + customer_name_ru,
+    "header-address": "ул. Бикурей а-Анавим 55, Ашкелон",
+    "scope-label": "Объём работ",
+    "s1-title": "Прокладка силового кабеля",
+    "s1-body": "Прокладка зелёного силового кабеля от парковочного места клиента до щита учёта на первом этаже в выделенной кабельной трассе в соответствии с требованиями Правил электроустановок.",
+    "s2-title": "Монтаж электрического щита (разветвление счётчика)",
+    "s2-body": "Установка электрощита непосредственно рядом с индивидуальным счётчиком клиента. Щит включает в себя:",
+    "s2-li1": "Главный автоматический выключатель",
+    "s2-li2": "Квартирный автоматический выключатель",
+    "s2-li3": "Автоматический выключатель цепи зарядной станции",
+    "s3-title": "Поставка и установка зарядной станции Nexus",
+    "s3-body": "Поставка и монтаж зарядной станции производства <strong>Nexus</strong> с максимальной мощностью зарядки до <strong>22 кВт / 32 А</strong>. Станция управляется через мобильное приложение или RFID-чип и поддерживает функцию программирования автоматического расписания зарядки.",
+    "s4-title": "Установка аварийного реле нагрузки",
+    "s4-body": "Установка реле нагрузки <strong>4×40 А</strong> рядом с зарядной станцией. Устройство выполняет функцию аварийного / сервисного выключателя, обязательного согласно требованиям Правил электроустановок.",
+    "total-label": "סה״כ להצעת מחיר זו",
+    "price-note": "כולל עמדת טעינה",
+    "vat-base-label": "לפני מע״מ",
+    "vat-tax-label": "מע״מ 18%",
+    "vat-total-label": "סה״כ לתשלום",
+    "add-label": "Дополнительные расходы — не включены в предложение",
+    "add-intro": "Следующие платежи обязательны, однако выплачиваются напрямую третьим сторонам и не входят в сумму данного предложения.",
+    "add1-title": "Сбор электрической компании — 656,08 ₪ (включая НДС)",
+    "add1-body": "Для подключения зарядной станции к счётчику требуется выезд представителя электрической компании для временного отключения напряжения. Данный тариф установлен компанией, и мы не имеем возможности влиять на его размер.",
+    "add2-title": "Проверка лицензированным электротехником — 700 ₪ + НДС",
+    "add2-body": "По закону по завершении монтажа зарядной станции обязательна инспекция сертифицированного независимого электротехника. Проверка выполняется внешним специалистом и оплачивается ему напрямую.",
+    "pay-label": "Условия оплаты",
+    "pay1-when": "Авансовый платёж",
+    "pay1-desc": "Банковский перевод до согласования даты монтажа",
+    "pay2-when": "По завершении работ",
+    "pay2-desc": "Банковский перевод в день окончания монтажа",
+    "pay-note": "* На каждый банковский перевод выставляется отдельная квитанция.",
+    "warr-label": "Гарантия и важные примечания",
+    "warr1-title": "Гарантия на оборудование и работы — 2 года",
+    "warr1-body": "Гарантийный срок — два года с даты завершения монтажа. Гарантия не распространяется на случаи вандализма, ремонт станции неуполномоченными специалистами, а также на неисправности, вызванные внутридомовыми аварийными ситуациями в электросети.",
+    "warr2-title": "Сроки выезда электрической компании",
+    "warr2-body": "Дата и время прибытия представителя электрической компании определяются исключительно самой компанией. Мы, как уполномоченная сторона, полностью зависим от их графика.",
+    "motto": "Мы уделяем особое внимание <span>эстетичному, аккуратному и профессиональному монтажу</span> на каждом объекте.<br/>Все работы выполняются в строгом соответствии с Правилами электроустановок, обеспечивая <span>максимальный уровень электробезопасности</span>."
+  },
+  he: {
+    "doc-title": "הצעת מחיר — " + customer_name_he,
+    "company-slogan": "אל תטען שלא ידעת",
+    "header-date": "13 באפריל 2026",
+    "header-title": "הצעת מחיר",
+    "header-subtitle": "מוגשת לכבוד: " + customer_name_he,
+    "header-address": "ביכורי הענבים 55, אשקלון",
+    "scope-label": "היקף העבודה",
+    "s1-title": "פריסת כבל חשמל",
+    "s1-body": "פריסת כבל חשמל ירוק מחניית הלקוחה עד לארון מונים בקומת הקרקע בצנרת ייעודית המוגדרת בחוק החשמל.",
+    "s2-title": "התקנת לוח חשמל (פיצול מונה)",
+    "s2-body": "התקנת לוח חשמל בצמוד למונה הפרטי של הלקוחה. הלוח כולל:",
+    "s2-li1": "מפסק ראשי",
+    "s2-li2": "מפסק דירה",
+    "s2-li3": "מפסק עמדת טעינה",
+    "s3-title": "אספקה והתקנת עמדת טעינה Nexus",
+    "s3-body": "אספקה והתקנת עמדת טעינה מבית <strong>נקסוס</strong> בעלת הספק טעינה כולל עד <strong>22KW / 32A</strong>. העמדה מופעלת באמצעות אפליקציה או צ'יפים וניתנת לתכנות שעות טעינה אוטומטיות.",
+    "s4-title": "התקנת ממסר פחת",
+    "s4-body": "התקנת ממסר פחת <strong>4×40A</strong> בצמוד לעמדת הטעינה, המשמש כמפסק חירום/שירות הנדרש על פי חוק החשמל.",
+    "total-label": "סה״כ להצעת מחיר זו",
+    "price-note": "כולל עמדת טעינה",
+    "vat-base-label": "לפני מע״מ",
+    "vat-tax-label": "מע״מ 18%",
+    "vat-total-label": "סה״כ לתשלום",
+    "add-label": "עלויות נוספות — אינן כלולות בהצעה",
+    "add-intro": "התשלומים הבאים הינם חובה, אולם משולמים ישירות לגורמים חיצוניים ואינם חלק מסכום ההצעה.",
+    "add1-title": "תשלום לחברת חשמל — 656.08 ₪ כולל מע\"מ",
+    "add1-body": "לצורך חיבור עמדת הטעינה למונה יש לשלם לחברת חשמל על מנת שנציג יגיע לנתק את הזרם. תשלום זה קבוע על ידי חברת חשמל ואין לנו יכולת השפעה עליו.",
+    "add2-title": "בדיקת בודק חשמל מוסמך — 700 ₪ + מע\"מ",
+    "add2-body": "על פי חוק חלה חובה לבדיקת בודק חשמל בסיום התקנת עמדת טעינה. הבודק הינו גורם חיצוני ויש לשלם לו ישירות עבור הבדיקה.",
+    "pay-label": "תנאי תשלום",
+    "pay1-when": "מקדמה",
+    "pay1-desc": "העברה בנקאית טרם קביעת יום ההתקנה",
+    "pay2-when": "יתרת התשלום",
+    "pay2-desc": "העברה בנקאית ביום סיום ההתקנה",
+    "pay-note": "* על כל העברה בנקאית תצא חשבונית קבלה בנפרד.",
+    "warr-label": "אחריות והערות חשובות",
+    "warr1-title": "אחריות לעמדה ולעבודה — שנתיים",
+    "warr1-body": "האחריות הינה לשנתיים מיום סיום ההתקנה. האחריות אינה מכסה מקרי ונדליזם, ניסיון לתקן את העמדה על ידי טכנאי שאינו מטעמינו, או תקלת חשמל ביתית שגרמה לכשל.",
+    "warr2-title": "זמני הגעת חברת חשמל",
+    "warr2-body": "זמני ההגעה של חברת חשמל הינם באחריותם בלבד ואנו כפופים אליהם כגורם מוסמך לניתוק החשמל במונה.",
+    "motto": "אנו מקדישים את מירב תשומת הלב ל<span>התקנה אסטטית, נקייה ואחראית</span> בכל עבודה.<br/>אנו נצמדים לחוקי החשמל לטובת <span>בטיחות ברמה הגבוהה ביותר</span>."
+  }
+};
+
+function formatPrice(n) {
+  return n.toLocaleString('he-IL') + ' ₪';
+}
+
+function initPrice() {
+  const vat = Math.round(total_price * 0.18);
+  const withVat = total_price + vat;
+  document.getElementById('priceDisplay').textContent = formatPrice(total_price) + ' + מע״מ';
+  document.getElementById('vatBase').textContent = formatPrice(total_price);
+  document.getElementById('vatTax').textContent = formatPrice(vat);
+  document.getElementById('vatTotal').textContent = formatPrice(withVat);
+  // Set customer name (default lang is RU)
+  document.getElementById('header-subtitle').textContent = 'Подготовлено для: ' + customer_name_ru;
+  document.title = 'Коммерческое предложение — ' + customer_name_ru;
+}
+
+function toggleVat() {
+  const result = document.getElementById('vatResult');
+  const btn = document.getElementById('vatBtn');
+  const isVisible = result.classList.contains('visible');
+  result.classList.toggle('visible', !isVisible);
+  btn.classList.toggle('active', !isVisible);
+  document.getElementById('vatBtnText').textContent = isVisible ? 'חשב כולל מע״מ 18%' : 'סגור';
+}
+
+document.addEventListener('DOMContentLoaded', initPrice);
+
+function setLang(lang) {
+  const t = T[lang];
+  const isHe = lang === 'he';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isHe ? 'rtl' : 'ltr';
+  document.title = t['doc-title'];
+  Object.keys(t).forEach(k => {
+    if (k === 'doc-title') return;
+    const el = document.getElementById(k);
+    if (el) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('.sub-list li').forEach(li => {
+    li.style.paddingLeft = isHe ? '0' : '18px';
+    li.style.paddingRight = isHe ? '18px' : '0';
+  });
+  document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+  document.getElementById('btn-he').classList.toggle('active', lang === 'he');
+}
+</script>
+</body>
+</html>
